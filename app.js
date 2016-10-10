@@ -14,6 +14,10 @@ app.config(['$routeProvider', function($routeProvider, $window){
 		templateUrl: 'loginNFC.html',
 		controller: 'nfcControl'
 	})
+	.when('/register',{
+		templateUrl: 'register.php',
+		controller: 'register'
+	})
 }])
 
 app.controller('mainPage', function($scope, $http, $timeout, $interval) {
@@ -74,4 +78,7 @@ app.controller('nfcControl', function($scope, $http, $routeParams) {
 	}).success(function(data, status){
 		$scope.data = data
 	})
+});
+app.controller('register', function($scope, $http, $routeParams) {
+	
 });
