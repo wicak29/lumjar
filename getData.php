@@ -48,8 +48,8 @@
 	$Connect = fsockopen($IP, "80", $errno, $errstr, 1);
 	if($Connect){
 		$soap_request="<GetAttLog><ArgComKey xsi:type=\"xsd:integer\">".$Key."</ArgComKey><Arg><PIN xsi:type=\"xsd:integer\">All</PIN></Arg></GetAttLog>";
-		fputs($Connect, "POST /iWsService HTTP/1.0\r\n".$newLine);
-	    fputs($Connect, "Content-Type: text/xml\r\n".$newLine);
+		fputs($Connect, "POST /iWsService HTTP/1.0\r\n");
+	    fputs($Connect, "Content-Type: text/xml\r\n");
 	    fputs($Connect, "Content-Length: ".strlen($soap_request)."\r\n\r\n");
 	    fputs($Connect, $soap_request."\r\n");
 		$buffer="";
