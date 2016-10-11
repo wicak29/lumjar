@@ -55,14 +55,14 @@ app.controller('mainPage', function($scope, $http, $timeout, $interval) {
 	});
 	// $scope.reloadData()
 });
-app.controller('homePage', function($scope, $http, $timeout) {
+app.controller('homePage', function($scope, $http, $timeout, $rootScope) {
 	$scope.reloadData = function(){
 		$http.get('getAll.php', {}).success(function(data, status){
 			$scope.data = data
 			// console.log(data)
 		})
 		$http.get('getData.php', {}).success(function(data, status){
-			$scope.user = data
+			$rootScope.user = data
 			// console.log(data)
 		})
 	}
@@ -80,5 +80,14 @@ app.controller('nfcControl', function($scope, $http, $routeParams) {
 	})
 });
 app.controller('register', function($scope, $http, $routeParams) {
-	
+	$scope.submit = function(){
+		$http({
+		    method: 'POST',
+		    url: 'userRegister.php',
+		    data: $scope.data,
+		    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+		}).success(function(data, status){
+			$scope.res = data
+		})
+	}
 });
