@@ -81,7 +81,7 @@
 		'Password' => $_POST['password'],
 		'Alamat' => $_POST['alamat'],
 		'Telepon' => $_POST['telepon'],
-		'Username' => $_POST['usename']
+		'Username' => $_POST['username']
 	);
 	// echo json_encode($data);
 	echo json_encode(addUser($data, $Key, $IP));
