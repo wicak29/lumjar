@@ -10,6 +10,10 @@ app.config(['$routeProvider', function($routeProvider, $window){
 		templateUrl: 'home.html',
 		controller: 'homePage'
 	})
+	.when('/nfc_data/:id', {
+		templateUrl: 'loginNFC.html',
+		controller: 'nfcControl'
+	})
 }])
 
 app.controller('mainPage', function($scope, $http, $timeout, $interval) {
@@ -59,4 +63,15 @@ app.controller('homePage', function($scope, $http, $timeout) {
 		})
 	}
 	$scope.reloadData()
+});
+app.controller('nfcControl', function($scope, $http, $routeParams) {
+	var data = $routeParams.id
+	$http({
+	    method: 'POST',
+	    url: 'nfcAuth.php',
+	    data: {"data": data},
+	    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+	}).success(function(data, status){
+		$scope.data = data
+	})
 });
