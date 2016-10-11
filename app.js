@@ -68,7 +68,7 @@ app.controller('homePage', function($scope, $http, $timeout, $rootScope) {
 	}
 	$scope.reloadData()
 });
-app.controller('nfcControl', function($scope, $http, $routeParams) {
+app.controller('nfcControl', function($scope, $http, $routeParams, $rootScope) {
 	var data = $routeParams.id
 	$http({
 	    method: 'POST',
@@ -76,7 +76,8 @@ app.controller('nfcControl', function($scope, $http, $routeParams) {
 	    data: {"data": data},
 	    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 	}).success(function(data, status){
-		$scope.data = data
+		// $scope.data = data
+		$rootScope.data = data
 	})
 });
 app.controller('register', function($scope, $http, $routeParams) {
