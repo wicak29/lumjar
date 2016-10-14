@@ -16,6 +16,31 @@
 		return $hasil;	
 	}
 
+	function storeDB($data) {
+		$id = $data['PIN'];
+		$name = $data['Name'];
+		$passwd = sha1($data['Password']);
+		$username = $data['Username'];
+		$address = $data['Alamat'];
+		$phone = $data['Telepon'];
+
+		$servername = "localhost";
+		$username = "jarmul";
+		$password = "jarmul";
+
+		try {
+		    $conn = new PDO("mysql:host=$servername;dbname=jarmul", $username, $password);
+		    // set the PDO error mode to exception
+		    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		    $sql = "INSERT INTO jm_user (id, username, password, nama, alamat, telepon)
+		    VALUES ('".$id."', '".$name."', '".$passwd."','".$username."','".$address."','".$phone."')";
+		    $conn->exec($sql);
+		}
+		catch(PDOException $e){
+		    echo "Connection failed: " . $e->getMessage();
+		}
+	}
+
 	function addUser($data, $Key, $IP){
 		$Connect = fsockopen($IP, "80", $errno, $errstr, 1);
 		if($Connect){
@@ -37,6 +62,7 @@
 
 		$buffer=Parse_Data($buffer,"<Information>","</Information>");
 		if ($buffer == 'Successfully!') {
+			storeDB($data);
 			$res = array(
 				'status' => 200,
 				'Name' => $data['Name'],
@@ -85,4 +111,5 @@
 	);
 	// echo json_encode($data);
 	echo json_encode(addUser($data, $Key, $IP));
+	// storeDB($data);
 ?>
